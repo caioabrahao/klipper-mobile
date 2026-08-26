@@ -36,15 +36,21 @@ export default defineConfig({
         "screenshots": [
           {
             "src": "/screenshots/screenshot-mobile-home.png",
-            "sizes": "1070x2532",
+            "sizes": "1170x2532",
             "type": "image/png",
             "form_factor": "narrow"
           },
           {
             "src": "/screenshots/screenshot-mobile-settings.png",
-            "sizes": "631x1366",
+            "sizes": "1170x2532",
             "type": "image/png",
             "form_factor": "narrow"
+          },
+          {
+            "src": "/screenshots/screenshot-desktop-settings.png",
+            "sizes": "2508x1604",
+            "type": "image/png",
+            "form_factor": "wide"
           }
         ]
       }
