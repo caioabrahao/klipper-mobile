@@ -37,7 +37,10 @@
         </ul>
     </div>
     <div class="navbar-end">
-        <a class="btn">Button</a>
+        <div>
+            <div class="badge bg-green-500 badge-sm"></div>
+            Connected
+        </div>
     </div>
     </div>
 </template>
