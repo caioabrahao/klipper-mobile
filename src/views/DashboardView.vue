@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { printerUrl } from '../utils/moonraker.ts'
 
 const temperature = ref(null);
-
+const cameraStreamUrl = ref(`http://${printerUrl}/webcam/?action=stream`)
 
 
 
@@ -40,7 +41,7 @@ const temperature = ref(null);
                 <input type="checkbox" checked />
                 <div class="collapse-title font-semibold">Camera Stream</div>
                 <div class="collapse-content text-sm">
-                    <img src="http://klipper.local/webcam/?action=stream" alt="camera">
+                    <img :src="cameraStreamUrl" alt="camera">
                 </div>
             </div>
         </div>
