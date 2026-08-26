@@ -1,25 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref } from 'vue'
 
 const temperature = ref(null);
 
-let socket:WebSocket;
 
-onMounted(async () => {
-  socket = new WebSocket('ws://klipper.local/websocket')
-
-  socket.onopen = () => {
-    console.log('Connected to Moonraker!')
-  }
-
-  socket.onmessage = (event) => {
-    console.log('Moonraker:', JSON.parse(event.data))
-  }
-})
-
-onUnmounted(() => {
-  socket?.close()
-})
 
 
 
