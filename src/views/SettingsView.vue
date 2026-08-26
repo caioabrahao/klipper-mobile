@@ -24,7 +24,7 @@
 
             <fieldset class="fieldset">
             <label class="label">
-                <input type="checkbox" checked="checked" class="toggle" />
+                <input type="checkbox" class="toggle" />
                 Enable Notifications
             </label>
             </fieldset>
