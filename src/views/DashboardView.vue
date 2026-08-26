@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import Header from './Header.vue';
-import Dock from './Dock.vue'
 
 const temperature = ref(null);
 
@@ -28,8 +26,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <Header/>
-    <section>
+    <section class="py-4">
         <div>
             <h2>Temperatures</h2>
             <div  class="flex justify-around">
@@ -73,8 +70,6 @@ onUnmounted(() => {
             </div>
         </div>
     </section>
-
-    <Dock/>
 </template>
 
 <style>

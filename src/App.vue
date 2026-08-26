@@ -1,10 +1,15 @@
 <script setup lang="ts">
-import Dashboard from './components/Dashboard.vue';
 import 'remixicon/fonts/remixicon.css'
+import Dock from './components/Dock.vue'
+import Header from './components/Header.vue';
 </script>
 
 <template>
-  <div class="relative min-h-screen gp-x">
-    <Dashboard/>
-  </div>
+  <Header/>
+
+  <main class="relative min-h-screen gp-x">
+    <RouterView />
+  </main>
+
+  <Dock/>
 </template>
