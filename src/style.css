@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@utility global-padding-x{
+    @apply px-4;
+  }
+@utility gp-x{
+  @apply global-padding-x;
+}
