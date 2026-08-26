@@ -7,7 +7,7 @@ import Header from './components/Header.vue';
 <template>
   <Header/>
 
-  <main class="relative min-h-screen gp-x">
+  <main class="relative min-h-screen gp-x py-4">
     <RouterView />
   </main>
 

@@ -26,7 +26,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <section class="py-4">
+    <section>
         <div>
             <h2>Temperatures</h2>
             <div  class="flex justify-around">
