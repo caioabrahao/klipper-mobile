@@ -1,13 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { printerUrl } from '../utils/moonraker.ts'
 
 const temperature = ref(null);
-const cameraStreamUrl = ref(`http://${printerUrl}/webcam/?action=stream`)
-
-
-
-
+const cameraStreamUrl = ref(`http://printer.camera.caioabrahao.com.br/stream`)
+    
 </script>
 
 <template>
