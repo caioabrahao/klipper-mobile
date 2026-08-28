@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-
-const temperature = ref(null);
+const toolTemp = ref('N/A');
+const bedTemp = ref('N/A')
 const cameraStreamUrl = ref(`http://printer.camera.caioabrahao.com.br/stream`)
     
 </script>
@@ -14,7 +14,7 @@ const cameraStreamUrl = ref(`http://printer.camera.caioabrahao.com.br/stream`)
                 <div class="card bg-base-100 card-md shadow-sm">
                     <div class="card-body">
                         <h2 class="card-title">Nozzle</h2>
-                        <span class="text-3xl font-bold">C°{{ temperature }}</span>
+                        <span class="text-3xl font-bold">{{ toolTemp }} C°</span>
                         <div class="card-actions">
                             <button class="btn btn-primary">Set Temperature</button>
                         </div>
@@ -23,7 +23,7 @@ const cameraStreamUrl = ref(`http://printer.camera.caioabrahao.com.br/stream`)
                 <div class="card bg-base-100 card-md shadow-sm">
                     <div class="card-body">
                         <h2 class="card-title">Bed</h2>
-                        <span class="text-3xl font-bold">C°60</span>
+                        <span class="text-3xl font-bold">{{ bedTemp }} C°</span>
                         <div class="card-actions">
                             <button class="btn btn-primary">Set Temperature</button>
                         </div>
@@ -33,6 +33,7 @@ const cameraStreamUrl = ref(`http://printer.camera.caioabrahao.com.br/stream`)
         </div>
 
         <div>
+            <h2>Camera Stream</h2>
             <div class="collapse bg-base-100 border border-base-300" selec>
                 <input type="checkbox" checked />
                 <div class="collapse-title font-semibold">Camera Stream</div>

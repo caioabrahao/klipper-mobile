@@ -38,9 +38,9 @@
     </div>
     <div class="navbar-end">
         <div>
-            <div class="badge bg-green-500 badge-sm"></div>
+            <div class="badge bg-green-600 badge-sm"></div>
             Connected
         </div>
     </div>
-    </div>
+</div>
 </template>

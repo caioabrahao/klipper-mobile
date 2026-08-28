@@ -1,1 +1,1 @@
-export const cameraStreamUrl = 'http://printer.camera.caioabrahao.com.br/stream'
+export const cameraStreamUrl = 'w'
