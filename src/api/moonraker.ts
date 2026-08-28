@@ -1,7 +1,7 @@
 export const moonrakerUrl = 'https://printer.caioabrahao.com.br'
 
 let token: string | null = null
-let refreshToken: string | null = null
+// let refreshToken: string | null = null
 
 export async function login(username:string, password:string) {
     const response = await fetch(
@@ -26,7 +26,7 @@ export async function login(username:string, password:string) {
     const data = await response.json()
 
     token = data.result.token
-    refreshToken = data.result.refresh_token
+    // refreshToken = data.result.refresh_token
 
     console.log('Logged in as:', data.result.username)
 
