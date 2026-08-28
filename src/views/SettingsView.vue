@@ -3,7 +3,7 @@ import LoginForm from '../components/LoginForm.vue';
 </script>
 
 <template>
-    <section>
+    <section class="section">
         <h1>Settings</h1>
         <LoginForm/>
 

@@ -7,7 +7,7 @@ const cameraStreamUrl = ref(`http://printer.camera.caioabrahao.com.br/stream`)
 </script>
 
 <template>
-    <section>
+    <section class="section">
         <div>
             <h2>Temperatures</h2>
             <div  class="flex justify-around">
