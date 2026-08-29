@@ -1,7 +1,6 @@
 <template>
-<div class="navbar bg-base-100 shadow-sm">
+<header class="navbar bg-base-100 shadow-sm sticky w-full top-0 z-10 gp-x">
     <div class="navbar-start">
-
         <div class="drawer lg:drawer-open">
             <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
             <div class="drawer-content flex flex-col items-center justify-center">
@@ -43,5 +42,5 @@
             Connected
         </div>
     </div>
-</div>
+</header>
 </template>
