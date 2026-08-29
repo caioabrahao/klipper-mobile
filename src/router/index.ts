@@ -4,6 +4,7 @@ import DashboardView from '../views/DashboardView.vue'
 import CameraView from '../views/CameraView.vue'
 import FilesView from '../views/FilesView.vue'
 import SettingsView from '../views/SettingsView.vue'
+import ControlView from '../views/ControlView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -24,6 +25,10 @@ const router = createRouter({
     {
       path: '/settings',
       component: SettingsView
+    },
+    {
+      path: '/control',
+      component: ControlView
     }
   ]
 })
