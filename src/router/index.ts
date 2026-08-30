@@ -5,6 +5,7 @@ import CameraView from '../views/CameraView.vue'
 import FilesView from '../views/FilesView.vue'
 import SettingsView from '../views/SettingsView.vue'
 import ControlView from '../views/ControlView.vue'
+import JobHistoryView from '../views/JobHistoryView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -29,6 +30,10 @@ const router = createRouter({
     {
       path: '/control',
       component: ControlView
+    },
+    {
+      path: '/jobHistory',
+      component: JobHistoryView
     }
   ]
 })

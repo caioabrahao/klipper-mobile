@@ -15,7 +15,7 @@ export const usePrinterStore = defineStore('printer', {
 
   actions: {
     setTemperature(temp: number) {
-      this.extruderTemperature = temp
+      this.toolTemperature = temp
     }
   }
 
