@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import LoginForm from '../components/LoginForm.vue';
+
 </script>
 
 <template>
     <section class="section">
         <h1>Settings</h1>
-        <LoginForm/>
 
         <div class="mb-6">
             <h3>Connection</h3>
