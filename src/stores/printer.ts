@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 export const usePrinterStore = defineStore('printer', {
 
   state: () => ({
-    extruderTemperature: 0,
+    toolTemperature: 0,
     bedTemperature: 0,
     progress: 0,
     state: 'idle'
@@ -15,7 +15,7 @@ export const usePrinterStore = defineStore('printer', {
 
   actions: {
     setTemperature(temp: number) {
-      this.extruderTemperature = temp
+      this.toolTemperature = temp
     }
   }
 
