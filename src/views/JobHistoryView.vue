@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useJobHistoryStore } from '../stores/jobHistory.ts'
 
@@ -10,14 +10,39 @@ onMounted(() => {
   jobHistory.fetchHistory({ limit: 20 })
 })
 
-const formatTime = (secs:number) => {
-  if (!secs) return '0s'
-  const mins = Math.floor(secs / 60)
-  return mins > 60 ? `${Math.floor(mins / 60)}h ${mins % 60}m` : `${mins}m`
-}
+
 </script>
 
 <template>
     <h1>Job History</h1>
-    <p>Total Jobs: {{ jobHistory.totalJobs }}</p>
+    <p>Total Jobs: {{ totalJobs }}</p>
+
+    <div>
+      <div class="overflow-x-auto">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Filename</th>
+              <th>Status</th>
+              <th>Started At</th>
+              <th>Ended At</th>
+              <th>Duration</th>
+              <th>Filament</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="job in jobs" :key="job.job_id">
+              <td>{{  parseInt(job.job_id, 16) }}</td>
+              <td>{{ job.filename }}</td>
+              <td>{{ job.status }}</td>
+              <td>{{ job.start_time }}</td>
+              <td>{{ job.end_time }}</td>
+              <td>{{ job.print_duration }}</td>
+              <td>{{ job.filament_used }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 </template>

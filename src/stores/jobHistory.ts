@@ -1,11 +1,44 @@
 import { defineStore } from 'pinia'
 
-const moonrakerUrl = 'http://100.78.52.7'
+const moonrakerUrl = 'http://192.168.0.57'
+
+// TYPESCRIPT TYPES so the compiler stops crying
+export interface JobMetadata {
+  size: number;
+  modified: number;
+  uuid: string;
+  file_processors: string[];
+  layer_count: number;
+  nozzle_diameter: number;
+  [key: string]: any; // Permite outras propriedades dinâmicas se houver
+}
+
+export interface PrintJob {
+  job_id: string;
+  user: string;
+  filename: string;
+  status: 'completed' | 'pending' | 'running' | 'failed' | 'cancelled' | string;
+  start_time: number;
+  end_time: number;
+  print_duration: number;
+  total_duration: number;
+  filament_used: number;
+  metadata: JobMetadata;
+  auxiliary_data: any[];
+  exists: boolean;
+}
+
+//STORE ITSELF
 
 export const useJobHistoryStore = defineStore('jobHistory', {
 
-  state: () => ({
-    jobs: [],
+  state: (): {
+    jobs: PrintJob[];
+    totalJobs: number;
+    isLoading: boolean;
+    error: string | null;
+  } => ({
+    jobs: [] as PrintJob[],
     totalJobs: 0,
     isLoading: false,
     error: null
