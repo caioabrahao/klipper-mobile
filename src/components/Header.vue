@@ -19,28 +19,14 @@
             </div>
         </div>
 
-        <a class="btn btn-ghost text-xl">Creality CR10 v3</a>
+        <span class="btn btn-ghost text-xl">CR-10 V3</span>
     </div>
     <div class="navbar-center hidden lg:flex">
-        <ul class="menu menu-horizontal px-1">
-        <li><a>Item 1</a></li>
-        <li>
-            <details>
-            <summary>Parent</summary>
-            <ul class="p-2 bg-base-100 w-40 z-1">
-                <li><a>Submenu 1</a></li>
-                <li><a>Submenu 2</a></li>
-            </ul>
-            </details>
-        </li>
-        <li><a>Item 3</a></li>
-        </ul>
+        
     </div>
+    
     <div class="navbar-end">
-        <div>
-            <div class="badge bg-green-600 badge-sm"></div>
-            Connected
-        </div>
+        
     </div>
 </header>
 </template>
