@@ -1,8 +1,6 @@
 import { defineStore } from 'pinia'
 import { useConnectionStore } from './connection'
 
-const connection = useConnectionStore();
-
 export const usePrinterStore = defineStore('printer', {
 
   state: () => ({
@@ -20,7 +18,7 @@ export const usePrinterStore = defineStore('printer', {
   actions: {
     async fetchStatus(){
       try{
-        const response = await fetch(`${connection.printerUrl}/printer/info`)
+        const response = await fetch(`${useConnectionStore().moonrakerUrl}/printer/info`)
 
         if (!response.ok) {
             throw new Error(`Moonraker Error: ${response.statusText}`)

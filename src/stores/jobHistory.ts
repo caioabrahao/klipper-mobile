@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
-
-const moonrakerUrl = 'http://192.168.0.57'
+import { useConnectionStore } from './connection';
 
 // TYPESCRIPT TYPES so the compiler stops crying
 export interface JobMetadata {
@@ -62,7 +61,7 @@ export const useJobHistoryStore = defineStore('jobHistory', {
         // if (options.since) params.append('since', options.since)
 
         try{
-            const response = await fetch(`${moonrakerUrl}/server/history/list?${params}`)
+            const response = await fetch(`${useConnectionStore().moonrakerUrl}/server/history/list?${params}`)
 
             if (!response.ok) {
                 throw new Error(`Moonraker Error: ${response.statusText}`)
