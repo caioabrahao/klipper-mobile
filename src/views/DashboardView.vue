@@ -4,16 +4,13 @@ const printer = usePrinterStore();
 </script>
 
 <template>
-    <div class="card">
-        <div class="card-title">
-            <h3>Nozzle </h3>
-        </div>
-        <div class="card-body">
-            <span>{{ printer.toolTemperature }}</span>
-        </div>
-        <div class="card-actions">
-            
-        </div>
+    <div>
+        <h4>Nozzle</h4>
+        <p>{{ printer.toolTemperature }}</p>
+    </div>
+    <div>
+        <h4>Bed</h4>
+        <p>{{ printer.bedTemperature }}</p>
     </div>
     
 </template>

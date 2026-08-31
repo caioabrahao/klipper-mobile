@@ -4,15 +4,12 @@ import { usePrinterStore } from '../../stores/printer';
 const printer = usePrinterStore();
 
 const props = defineProps({
-  title: {
+  source: {
     type: String,
     required: true
   },
-  likes: {
-    type: Number,
-    default: 0
-  }
 })
+
 
 </script>
 

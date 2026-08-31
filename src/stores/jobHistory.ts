@@ -61,7 +61,7 @@ export const useJobHistoryStore = defineStore('jobHistory', {
         // if (options.since) params.append('since', options.since)
 
         try{
-            const response = await fetch(`${useConnectionStore().moonrakerUrl}/server/history/list?${params}`)
+            const response = await fetch(`http://${useConnectionStore().moonrakerUrl}/server/history/list?${params}`)
 
             if (!response.ok) {
                 throw new Error(`Moonraker Error: ${response.statusText}`)
