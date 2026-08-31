@@ -35,6 +35,8 @@ function enableEditing(){
                 <p class="label">{{ connection.wsState }}</p>
             </fieldset>
 
+            <div class="divider"></div>
+
             <fieldset class="fieldset p-4">
                 <legend class="fieldset-legend">Enable Secure Connections?</legend>
                 <label class="label">
