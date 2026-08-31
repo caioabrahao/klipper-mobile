@@ -1,12 +1,16 @@
 import { defineStore } from 'pinia'
+import { useConnectionStore } from './connection'
+
+const connection = useConnectionStore();
 
 export const usePrinterStore = defineStore('printer', {
 
   state: () => ({
-    toolTemperature: 0,
-    bedTemperature: 0,
-    progress: 0,
-    state: 'idle'
+    state: "error",
+    stateMessage: "",
+    hostname: "",
+    logFileDir: "",
+    error: null
   }),
 
   getters: {
@@ -14,8 +18,25 @@ export const usePrinterStore = defineStore('printer', {
   },
 
   actions: {
-    setTemperature(temp: number) {
-      this.toolTemperature = temp
+    async fetchStatus(){
+      try{
+        const response = await fetch(`${connection.printerUrl}/printer/info`)
+
+        if (!response.ok) {
+            throw new Error(`Moonraker Error: ${response.statusText}`)
+        }
+        const data = await response.json()
+        if (data.result) {
+            this.state = data.result.state || []
+            this.stateMessage = data.result.state_message || 0
+            this.hostname = data.result.hostname || 0
+            this.logFileDir = data.result.log_file || 0
+            
+        }
+      } catch (err:any) {
+          this.error = err.message
+          console.error('Failed fetching Moonraker history:', err)
+        } 
     }
   }
 

@@ -1,1 +1,0 @@
-export const printerUrl = 'http://100.78.52.7'
