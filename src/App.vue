@@ -9,7 +9,7 @@ import { usePrinterStore } from './stores/printer.ts';
 const connection = useConnectionStore();
 const printer = usePrinterStore();
 onMounted(() => {
-  connection.startWebSocket();
+  connection.wsAttemptConnection();
   printer.getTemperatureUpdates();
 })
 </script>

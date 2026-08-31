@@ -14,13 +14,18 @@ export const useConnectionStore = defineStore('connection', {
         klippyState: "error",
         klippyStateMessage: "",
         wsIsConnected: false,
+        wsState: "Not Connected",
         hostname: "",
         logFileDir: "",
         ws: null as WebSocket | null,
         error: null as string | null
     }),
 
-      getters: {
+    persist: {
+        pick: ['moonrakerUrl']
+    },
+
+    getters: {
         isPrinting: (state) => state.klippyState === 'printing'
     },
 
@@ -46,34 +51,31 @@ export const useConnectionStore = defineStore('connection', {
             } 
         },
 
-        async startWebSocket (){
+        async wsAttemptConnection (){
             const ws = new WebSocket(`ws://${this.moonrakerUrl}/websocket`);
             console.log(`Trying to start WS at ws://${this.moonrakerUrl}/websocket`)
+            this.wsState = "Trying to Connect..."
 
             ws.onopen = () =>{
                 console.log("Connected to Moonraker WebSocket");
+                this.wsState = "Connected"
                 this.wsIsConnected = true;
                 this.ws = ws;
 
-                ws.onmessage = (event: MessageEvent) =>{
-                    try{
-                        const response = JSON.parse(event.data)
-
-                        if (response.id === 1001) {
-                            console.log("Subscription successful. Initial state:", response.result);
-                            return;
-                        }  
-
-                    } catch(error) {
-                        console.error("Failed to parse Moonraker message:", error);
-                    }
+                ws.onerror = (error) => {
+                    console.error("Moonraker Socket Error:", error);
+                    this.wsState = "Connection Error!"
                 }
-                ws.onerror = (error) => console.error("Moonraker Socket Error:", error);
                 ws.onclose = () => {
                     this.wsIsConnected = false;
+                    this.wsState = "Connection Closed"
                     this.ws = null;
                     console.log("Connection to Moonraker closed.");
                 };
+            }
+
+            ws.onerror = () => {
+                this.wsState = "Failed to Connect"
             }
         },
 
@@ -91,26 +93,5 @@ export const useConnectionStore = defineStore('connection', {
             this.ws.send(JSON.stringify(subscriptionPayload));
         
         },
-
-        async addWebSocketListener(objects={}){
-            if(!this.ws){
-                console.log("Cant add Listener, Websocket not connected!")
-                return
-            }
-            this.ws.onmessage  = (event: MessageEvent) => {
-                try{
-                    const response = JSON.parse(event.data);
-
-                    if (response.method === "notify_status_update") {
-                        const statusUpdates = response.params[0]; // Moonraker passes status objects in an array
-                        
-                        return statusUpdates
-                    }
-                }catch(error) {
-                    console.error("Failed to parse Moonraker message:", error);
-                }
-            }
-           
-        }
     }
 })
