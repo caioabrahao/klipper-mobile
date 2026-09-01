@@ -12,7 +12,7 @@ const printerObjectsSubscribe = {
             "extruder": ['temperature', 'target', 'power', 'can_extrude'],
             "heater_bed": ['temperature', 'target', 'power'],
             "fan": ['speed', 'rpm'],
-            "print_stats": ['filename', 'total_duration', 'print_duration', 'filament_used', 'state', 'info'],
+            "print_stats": ['filename', 'total_duration', 'print_duration', 'filament_used', 'state', 'message', 'info'],
             "filament_switch_sensor": ['filament_detected', 'enabled']
         }
     },
@@ -82,15 +82,13 @@ export const useConnectionStore = defineStore('connection', {
                 const printer = usePrinterStore();
                 const result = JSON.parse(event.data)
                 if (result.method === undefined){
-                    // console.log("First Reading:", result)
-                    printer.updateReadings(result)
+                    // console.log("First Reading:", result.result.status)
+                    printer.updateReadings(result.result.status)
                 }
                 else if (result.method === 'notify_status_update'){
                     this.latestReading = result.params[0]
                     // console.log("Latest Reading:", result)
                     printer.updateReadings(this.latestReading)
-
-
                 }
                 
             };

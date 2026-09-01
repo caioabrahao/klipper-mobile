@@ -38,7 +38,8 @@ export const usePrinterStore = defineStore('printer', {
       "total_duration": 0.0,
       "print_duration": 0.0,
       "filament_used": 0.0,
-      "state": "standby",
+      "state": "",
+      "message": '',
       "info": {
           "total_layer": null,
           "current_layer": null
@@ -62,9 +63,9 @@ export const usePrinterStore = defineStore('printer', {
       Object.assign(this.motion, readings.motion_report)
       Object.assign(this.extruder, readings.extruder)
       Object.assign(this.bed, readings.heater_bed)
-      Object.assign(this.bed, readings.fan)
-      Object.assign(this.bed, readings.print_stats)
-      Object.assign(this.bed, readings.filament_switch_sensor)
+      Object.assign(this.fan, readings.fan)
+      Object.assign(this.printStatus, readings.print_stats)
+      Object.assign(this.filamentSensor, readings.filament_switch_sensor)
     }
 
   }
