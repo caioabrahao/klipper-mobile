@@ -1,21 +1,19 @@
 import { defineStore } from 'pinia'
-import { useConnectionStore } from './connection'
 
 export const usePrinterStore = defineStore('printer', {
 
   state: () => ({
+    latestReading: null,
     toolTemperature: 0,
     bedTemperature: 0,
   }),
 
   getters: {
-
+    
   },
 
   actions: {
-    async getTemperatureUpdates(){
-      
-    }
-  }
+    
 
+  }
 })

@@ -11,7 +11,7 @@ function updateMoonrakerUrl(url:string){
     userMoonrakerUrl.value = normalizedMoonrakerUrl;
     connection.moonrakerUrl = normalizedMoonrakerUrl;
     console.log(`Updated moonrakerUrl to '${connection.moonrakerUrl}'`)
-    connection.wsAttemptConnection()
+    // connection.wsAttemptConnection()
     isEditing.value = false
 }
 function enableEditing(){
