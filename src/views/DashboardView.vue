@@ -6,11 +6,11 @@ const printer = usePrinterStore();
 <template>
     <div>
         <h4>Nozzle</h4>
-        <p>{{ printer.toolTemperature }}</p>
+        <p>{{ printer.extruder.temperature }}</p>
     </div>
     <div>
         <h4>Bed</h4>
-        <p>{{ printer.bedTemperature }}</p>
+        <p>{{ printer.bed.temperature }}</p>
     </div>
     
 </template>
