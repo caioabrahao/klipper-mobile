@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import { useConnectionStore } from '../stores/connection';
+
+</script>
+
 <template>
 <header class="navbar bg-base-100 shadow-sm sticky w-full top-0 z-10 gp-x">
     <div class="navbar-start">
@@ -26,7 +31,9 @@
     </div>
     
     <div class="navbar-end">
-        
+        <div>
+            {{ useConnectionStore().wsState }}
+        </div>
     </div>
 </header>
 </template>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { usePrinterStore } from '../../stores/printer';
+import { formatPercentage } from '../../utils/unitFormatter';
 const printer = usePrinterStore();
 
 const isExtruder = computed(() => props.source === 'extruder')
@@ -13,6 +14,16 @@ const maxTemp = computed(() =>
     isExtruder.value
         ? printer.configfile.extruder.max_temp
         : printer.configfile.heater_bed.max_temp
+)
+const targetTemperature = computed(() =>
+    isExtruder.value
+        ? printer.extruder.target
+        : printer.bed.target
+)
+const power = computed(() =>
+    isExtruder.value
+            ? formatPercentage(printer.extruder.power)
+            : formatPercentage(printer.bed.power)
 )
 const label = computed(() =>
     isExtruder.value ? 'Nozzle' : 'Bed'
@@ -30,8 +41,6 @@ const props = defineProps<{
   source: SourceOptions;
 }>()
 
-
-
 </script>
 
 <template>
@@ -41,13 +50,26 @@ const props = defineProps<{
         <h4>{{ label }}</h4>
       </div>
       <p class="z-10"><span class="font-bold">{{ temperature }}</span> °C</p>
-      <input class="range range-xl [--range-bg:none] range-primary rounded-none
-       [&::-webkit-slider-thumb]:w-2  [&::-webkit-slider-runnable-track]:opacity-25
-       pointer-events-none
-       absolute w-full h-full left-0 bottom-0" 
-      type="range" min="0" 
-      :max="maxTemp" 
+      <input class="range range-md range-primary rounded-none pointer-events-none [&::-webkit-slider-thumb]:h-13 [&::-webkit-slider-thumb]:w-4
+        [--range-bg:none] [&::-webkit-slider-runnable-track]:opacity-25 [--range-thumb:var(--color-primary)]
+        absolute w-full h-full left-0 bottom-0" 
+      type="range" min="0" :max="maxTemp" 
       :value="temperature">
+
+      <input v-if="targetTemperature > 0" class="range range-md z-20 range-secondary rounded-none pointer-events-none
+       [--range-fill:0] [--range-bg:none] [--range-p:0] [--range-thumb:none] [&::-webkit-slider-thumb]:w-0.5
+       [&::-webkit-slider-thumb]:h-12 [&::-webkit-slider-thumb]:border [&::-webkit-slider-thumb]:border-dashed [&::-webkit-slider-thumb]:border-primary
+       absolute w-full h-full left-0 bottom-0" 
+      type="range" min="0" :max="maxTemp" 
+      :value="targetTemperature">
+
+      <input v-if="power > 0" class="range range-xs z-30 range-primary rounded-none pointer-events-none
+       [--range-bg:none] [--range-thumb:var(--color-primary)] [&::-webkit-slider-thumb]:border-none
+       [&::-webkit-slider-runnable-track]:opacity-50
+       absolute w-full h-[5%] left-0 bottom-0" 
+      type="range" min="0" max="100" 
+      :value="power">
   </div>
 
 </template>
+
