@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { formatDuration, formatMillimeters, formatPercentage } from '../utils/unitFormatter';
 
 export const usePrinterStore = defineStore('printer', {
 
@@ -45,6 +46,10 @@ export const usePrinterStore = defineStore('printer', {
           "current_layer": null
       }
     },
+    progressStatus: {
+      "message": "",
+      "progress": 0.0
+    },
     filamentSensor: {
       "filament_detected": false,
       "enabled": true
@@ -55,6 +60,22 @@ export const usePrinterStore = defineStore('printer', {
     },
 
   getters: {
+    formattedTotalDuration(state){
+      return formatDuration(state.printStatus.total_duration)
+    },
+    formattedPrintDuration(state){
+      return formatDuration(state.printStatus.print_duration)
+    },
+    formattedFilamentUsed(state){
+      return formatMillimeters(state.printStatus.filament_used)
+    },
+    formattedProgress(state){
+      return formatPercentage(state.progressStatus.progress)
+    },
+    formattedPrintState(state){
+      return state.printStatus.state.charAt(0).toUpperCase() + state.printStatus.state.slice(1)
+    }
+      
     
   },
 
@@ -65,6 +86,7 @@ export const usePrinterStore = defineStore('printer', {
       Object.assign(this.bed, readings.heater_bed)
       Object.assign(this.fan, readings.fan)
       Object.assign(this.printStatus, readings.print_stats)
+      Object.assign(this.progressStatus, readings.display_status)
       Object.assign(this.filamentSensor, readings.filament_switch_sensor)
     }
 

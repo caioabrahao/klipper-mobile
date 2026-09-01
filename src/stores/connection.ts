@@ -13,6 +13,7 @@ const printerObjectsSubscribe = {
             "heater_bed": ['temperature', 'target', 'power'],
             "fan": ['speed', 'rpm'],
             "print_stats": ['filename', 'total_duration', 'print_duration', 'filament_used', 'state', 'message', 'info'],
+            "display_status": ['message', 'progress'],
             "filament_switch_sensor": ['filament_detected', 'enabled']
         }
     },
