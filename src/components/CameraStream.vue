@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useServerStore } from '../stores/server';
 
-
 const server = useServerStore();
-const webcamStreamUrl = await server.webcamStream
+server.fetchWebcams();
+const webcamStreamUrl = server.webcamStream
 </script>
 
 <template>
