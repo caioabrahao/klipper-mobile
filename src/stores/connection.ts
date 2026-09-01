@@ -8,6 +8,7 @@ const printerObjectsSubscribe = {
     "params": {
         "objects": {
             "motion_report": ['live_position', 'live_velocity', 'live_extruder_velocity'],
+            "configfile": ['extruder', 'heater_bed'],
             "extruder": ['temperature', 'target', 'power', 'can_extrude'],
             "heater_bed": ['temperature', 'target', 'power'],
             "fan": ['speed', 'rpm'],
@@ -17,6 +18,7 @@ const printerObjectsSubscribe = {
     },
     "id": 5434
 }
+
 
 export const useConnectionStore = defineStore('connection', {
     state: () => ({
@@ -41,7 +43,7 @@ export const useConnectionStore = defineStore('connection', {
     },
 
     actions: {
-        async fetchStatus(){
+        async fetchKlippyStatus(){
         try{
             const response = await fetch(`http://${this.moonrakerUrl}/printer/info`)
 
@@ -63,13 +65,12 @@ export const useConnectionStore = defineStore('connection', {
         },
 
         wsAttemptConnection (){
-        
             const ws = new WebSocket(`ws://${this.moonrakerUrl}/websocket`);
-            console.log(`Trying to start WS at ws://${this.moonrakerUrl}/websocket`)
+            console.log(`🤨 Trying to stablish connection at ws://${this.moonrakerUrl}/websocket`)
             this.wsState = "Trying to Connect..."
         
             ws.onopen = () =>{
-                console.log("Connected to Moonraker WebSocket");
+                console.log("👌 Connected to Moonraker WebSocket");
                 this.wsState = "Connected"
                 this.wsIsConnected = true;
                 this.ws = ws;

@@ -8,6 +8,16 @@ export const usePrinterStore = defineStore('printer', {
       "live_velocity": 0,
       "live_extruder_velocity": 0,
     },
+    configfile:{
+      "extruder": {
+            "min_temp": "0",
+            "max_temp": "305"
+        },
+        "heater_bed": {
+            "min_temp": "0",
+            "max_temp": "125"
+        },
+    },
     extruder: {
         temperature: 0,
         target: 0,
@@ -39,6 +49,9 @@ export const usePrinterStore = defineStore('printer', {
       "enabled": true
     }
   }),
+  persist: {
+        pick: ['configfile']
+    },
 
   getters: {
     
