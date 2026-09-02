@@ -22,8 +22,8 @@ const targetTemperature = computed(() =>
 )
 const power = computed(() =>
     isExtruder.value
-            ? formatPercentage(printer.extruder.power)
-            : formatPercentage(printer.bed.power)
+        ? formatPercentage(printer.extruder.power)
+        : formatPercentage(printer.bed.power)
 )
 const label = computed(() =>
     isExtruder.value ? 'Nozzle' : 'Bed'
