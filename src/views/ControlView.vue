@@ -1,9 +1,11 @@
 <script setup lang="ts">
-
+import { ref } from 'vue'
+const cameraStreamUrl = ref(`http://printer.camera.caioabrahao.com.br/stream`)
 </script>
 
 <template>
     <h1>Printer Controls</h1>
+    <img :src="cameraStreamUrl" alt="camera">
 
     <div class="flex flex-col items-center gap-4">
         <div class="grid grid-cols-3 grid-rows-2 w-fit">
