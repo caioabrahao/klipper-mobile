@@ -68,7 +68,7 @@ function enableEditing(){
                     <li class="list-row items-center">
                         <p>Klippy</p>
                         <div>{{ connection.klippyState }}</div>
-                        <button class="btn">
+                        <button @click="connection.fetchKlippyStatus()" class="btn">
                             <i class="ri-refresh-line"></i>    
                         </button>
                     </li>
@@ -76,6 +76,17 @@ function enableEditing(){
                     
                 </ul>
             </div>
+        </div>
+        <div>
+            <h3>App Info</h3>
+            <ul class="opacity-50">
+                <li>App version: devBuild a-1.8</li>
+                <li>App Repository: <a class="btn-link" href="https://github.com/caioabrahao/klipper-mobile">Here</a></li>
+            </ul>
+            <h4>Credits</h4>
+            <ul class="opacity-50">
+                <li>Created by: <a class="btn-link" href="https://github.com/caioabrahao">Caio Abrahão</a></li>
+            </ul>
         </div>
         
     </section>

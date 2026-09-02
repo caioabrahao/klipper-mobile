@@ -24,7 +24,7 @@ const stateColor = computed(() =>
     <div>
         <h5 class="text-lg font-medium">{{ printer.printStatus.filename }}</h5>
     </div>
-    <ul class="flex justify-around items-center gap-4 my-4">
+    <ul class="flex justify-around items-center gap-2 my-2">
         <li class="flex flex-col w-full rounded-xl p-2 bg-base-200 border border-base-300 items-center justify-center"><i class="ri-file-history-fill"></i> {{ printer.formattedTotalDuration }} <br></li>
         <li class="flex flex-col w-full rounded-xl p-2 bg-base-200 border border-base-300 items-center justify-center"><i class="ri-hourglass-fill"></i> {{ printer.formattedPrintDuration  }} <br></li>
         <li class="flex flex-col w-full rounded-xl p-2 bg-base-200 border border-base-300 items-center justify-center"><i class="ri-hourglass-fill"></i> {{ printer.formattedPrintDuration  }} <br></li>
