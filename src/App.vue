@@ -2,6 +2,13 @@
 import 'remixicon/fonts/remixicon.css'
 import Dock from './components/Dock.vue'
 import Header from './components/Header.vue';
+import { useConnectionStore } from './stores/connection.ts';
+import { onMounted } from 'vue';
+
+const connection = useConnectionStore();
+onMounted(() => {
+  connection.wsAttemptConnection();
+})
 </script>
 
 <template>
