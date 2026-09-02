@@ -1,34 +1,47 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import DashboardView from '../views/DashboardView.vue'
-import CameraView from '../views/CameraView.vue'
 import FilesView from '../views/FilesView.vue'
 import SettingsView from '../views/SettingsView.vue'
 import ControlView from '../views/ControlView.vue'
+import JobHistoryView from '../views/JobHistoryView.vue'
+import SystemView from '../views/SystemView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
-
   routes: [
     {
       path: '/',
-      component: DashboardView
+      component: DashboardView,
+      name: 'Dashboard',
+      meta:{
+        icon: 'A'
+      }
     },
     {
-      path: '/camera',
-      component: CameraView
+      path: '/system',
+      component: SystemView,
+      name: 'System'
     },
     {
       path: '/files',
-      component: FilesView
+      component: FilesView,
+      name: 'Files'
     },
     {
       path: '/settings',
-      component: SettingsView
+      component: SettingsView,
+      name: 'Settings'
     },
     {
       path: '/control',
-      component: ControlView
+      component: ControlView,
+      name: 'Control'
+    },
+    {
+      path: '/jobHistory',
+      component: JobHistoryView,
+      name: 'History'
     }
   ]
 })

@@ -1,59 +1,50 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-const toolTemp = ref('N/A');
-const bedTemp = ref('N/A')
-const cameraStreamUrl = ref(`http://printer.camera.caioabrahao.com.br/stream`)
-    
+import { computed } from 'vue';
+import CameraStream from '../components/CameraStream.vue'
+import TempCard from '../components/printer/TempCard.vue';
+import { usePrinterStore } from '../stores/printer.ts';
+
+const printer = usePrinterStore();
+const stateColor = computed(() =>
+    printer.printStatus.state === "standby" ? "text-primary-content" : 
+    printer.printStatus.state === "printing" ? "text-info" :
+    printer.printStatus.state === "paused" ? "text-warning" :
+    printer.printStatus.state === "complete" ? "text-success" :
+    printer.printStatus.state === "error" ? "text-error" :
+    printer.printStatus.state === "cancelled" ? "text-error" :
+    "text-primary-content"
+)
+
 </script>
 
 <template>
-    <section class="section">
-        <div>
-            <h2>Temperatures</h2>
-            <div  class="flex justify-around">
-                <div class="card bg-base-100 card-md shadow-sm">
-                    <div class="card-body">
-                        <h2 class="card-title">Nozzle</h2>
-                        <span class="text-3xl font-bold">{{ toolTemp }} C°</span>
-                        <div class="card-actions">
-                            <button class="btn btn-primary">Set Temperature</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card bg-base-100 card-md shadow-sm">
-                    <div class="card-body">
-                        <h2 class="card-title">Bed</h2>
-                        <span class="text-3xl font-bold">{{ bedTemp }} C°</span>
-                        <div class="card-actions">
-                            <button class="btn btn-primary">Set Temperature</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div :class="stateColor" class="bg-base-200 flex items-center justify-center w-full rounded-xl">
+        {{ printer.formattedPrintState }}
+    </div>
+    <div>
+        <h5 class="text-lg font-medium">{{ printer.printStatus.filename }}</h5>
+    </div>
+    <ul class="flex justify-around items-center gap-2 my-2">
+        <li class="flex flex-col w-full rounded-xl p-2 bg-base-200 border border-base-300 items-center justify-center"><i class="ri-file-history-fill"></i> {{ printer.formattedTotalDuration }} <br></li>
+        <li class="flex flex-col w-full rounded-xl p-2 bg-base-200 border border-base-300 items-center justify-center"><i class="ri-hourglass-fill"></i> {{ printer.formattedPrintDuration  }} <br></li>
+        <li class="flex flex-col w-full rounded-xl p-2 bg-base-200 border border-base-300 items-center justify-center"><i class="ri-hourglass-fill"></i> {{ printer.formattedPrintDuration  }} <br></li>
+    </ul>
+    
+    <span class="flex w-full rounded-xl p-2 bg-base-200 border border-base-300 items-center justify-center">
+        <p><i class="ri-stack-fill"></i> Layer: {{ printer.printStatus.info.current_layer }} / {{ printer.printStatus.info.total_layer }}</p>    
+    </span>
+    
+    <div class="relative flex my-4">
+        <span class="absolute z-10 h-full inset-0 flex items-center left-4">Print Progress {{ printer.formattedProgress }} %</span>
+        <progress class="progress progress-primary h-8 rounded-xl" :value="printer.progressStatus.progress" max="1"></progress>
+    </div>
 
-        <div>
-            <h2>Camera Stream</h2>
-            <div class="collapse bg-base-100 border border-base-300" selec>
-                <input type="checkbox" checked />
-                <div class="collapse-title font-semibold">Camera Stream</div>
-                <div class="collapse-content text-sm">
-                    <img :src="cameraStreamUrl" alt="camera">
-                </div>
-            </div>
-        </div>
-
-        <div>
-            <h2>Quick Actions</h2>
-            <div>
-                <button class="btn">Cancel Print</button>
-                <button class="btn">Pause Print</button>
-                <button class="btn">Emergency Stop</button>
-            </div>
-        </div>
-    </section>
+    <div class="w-full h-64 my-4 mb-8">
+        <CameraStream/>
+    </div>
+    <div class="flex flex-col gap-2">
+        <TempCard source="extruder"/>
+        <TempCard source="bed"/>
+    </div>
+    
 </template>
-
-<style>
-
-</style>

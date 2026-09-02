@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import { useConnectionStore } from '../stores/connection';
+
+</script>
+
 <template>
 <header class="navbar bg-base-100 shadow-sm sticky w-full top-0 z-10 gp-x">
     <div class="navbar-start">
@@ -19,28 +24,17 @@
             </div>
         </div>
 
-        <a class="btn btn-ghost text-xl">Creality CR10 v3</a>
+        <span class="btn btn-ghost text-xl">CR-10 V3</span>
     </div>
     <div class="navbar-center hidden lg:flex">
-        <ul class="menu menu-horizontal px-1">
-        <li><a>Item 1</a></li>
-        <li>
-            <details>
-            <summary>Parent</summary>
-            <ul class="p-2 bg-base-100 w-40 z-1">
-                <li><a>Submenu 1</a></li>
-                <li><a>Submenu 2</a></li>
-            </ul>
-            </details>
-        </li>
-        <li><a>Item 3</a></li>
-        </ul>
+        
     </div>
+    
     <div class="navbar-end">
-        <div>
-            <div class="badge bg-green-600 badge-sm"></div>
-            Connected
-        </div>
+        <ul class="opacity-50">
+            <li>Ws: {{ useConnectionStore().wsState }}</li>
+            <li>Klippy: {{ useConnectionStore().klippyState }}</li>
+        </ul>
     </div>
 </header>
 </template>
