@@ -40,7 +40,9 @@ export const useConnectionStore = defineStore('connection', {
     },
 
     getters: {
-        // isPrinting: (state) => state.klippyState === 'printing'
+        fullMoonrakerUrl(state) {
+            return "http://" + state.moonrakerUrl
+        }
     },
 
     actions: {

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useGcodeStore } from '../stores/gcode';
 const cameraStreamUrl = ref(`http://printer.camera.caioabrahao.com.br/stream`)
+
+const gcode = useGcodeStore();
 </script>
 
 <template>
@@ -16,7 +19,7 @@ const cameraStreamUrl = ref(`http://printer.camera.caioabrahao.com.br/stream`)
         </div>
 
         <div class="flex gap-4">
-            <button class="btn btn-primary">Home Axis <i class="ri-home-2-fill"></i></button>
+            <button @click="gcode.sendGcode(gcode.homeAllAxis)" class="btn btn-primary">Home Axis <i class="ri-home-2-fill"></i></button>
             <button class="btn btn-warning">Motors Off <i class="ri-hand"></i></button>
         </div>
 
