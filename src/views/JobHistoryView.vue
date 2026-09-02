@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useJobHistoryStore } from '../stores/jobHistory.ts'
 
 const jobHistory = useJobHistoryStore();
-const { jobs, totalJobs, isLoading, error } = storeToRefs(jobHistory)
+const { jobs, totalJobs } = storeToRefs(jobHistory)
 
 onMounted(() => {
   jobHistory.fetchHistory({ limit: 20 })
