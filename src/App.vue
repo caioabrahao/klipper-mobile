@@ -16,7 +16,7 @@ onMounted(() => {
 <template>
   <Header/>
   <main class="relative min-h-screen gp-x py-4">
-    <KlippyState v-if="connection.klippyState != 'ready'"/>
+    <KlippyState v-if="connection.klippyState != 'ready' || !connection.wsIsConnected"/>
     <RouterView />
   </main>
   <Dock/>
