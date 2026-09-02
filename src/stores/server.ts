@@ -6,11 +6,12 @@ export const useServerStore = defineStore('server', {
         webcam:{
             snapshot_url: '',
             stream_url: ''
-        }
+        },
+        isCrowsnestConnected: false
     }),
     getters:{
-        webcamStream(): string{
-            return `http://${useConnectionStore().moonrakerUrl}${this.webcam.stream_url}`
+        webcamStream(state): string{
+            return `http://${useConnectionStore().moonrakerUrl}${state.webcam.stream_url}`
         }
     },
     persist: true,
@@ -24,6 +25,7 @@ export const useServerStore = defineStore('server', {
                     throw new Error(`Moonraker Error: ${response.statusText}`)
                 }
                 const data = await response.json()
+                this.isCrowsnestConnected = true
                 Object.assign(this.webcam, data.result.webcams[0])
                 console.log("🎥 Streaming Webcam at:", this.webcamStream)
 

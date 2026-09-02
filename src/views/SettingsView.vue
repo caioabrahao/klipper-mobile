@@ -49,13 +49,6 @@ function enableEditing(){
             <div>
                 <ul class="list">
                     <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Connection States</li>
-                    <li class="list-row items-center">
-                        <p>Http</p>
-                        <div>idk yet</div>
-                        <button class="btn">
-                            <i class="ri-refresh-line"></i>    
-                        </button>
-                    </li>
 
                     <li class="list-row items-center">
                         <p>WebSocket</p>

@@ -7,5 +7,5 @@ const webcamStreamUrl = server.webcamStream
 </script>
 
 <template>
-    <img :src="webcamStreamUrl" alt="webcam stream">
+    <img v-if="server.isCrowsnestConnected === true" :src="webcamStreamUrl" alt="webcam stream">
 </template>
