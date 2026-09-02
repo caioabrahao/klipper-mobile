@@ -49,7 +49,7 @@ export const useConnectionStore = defineStore('connection', {
         async fetchKlippyStatus(){
         try{
             const response = await fetch(`http://${this.moonrakerUrl}/printer/info`)
-
+            this.klippyState = 'Checking...'
             if (!response.ok) {
                 throw new Error(`Moonraker Error: ${response.statusText}`)
             }
@@ -59,7 +59,7 @@ export const useConnectionStore = defineStore('connection', {
                 this.klippyStateMessage = data.result.state_message || 0
                 this.hostname = data.result.hostname || 0
                 this.logFileDir = data.result.log_file || 0
-                
+                console.log("Klippy State:", this.klippyState)
             }
         } catch (err:any) {
             this.error = err.message

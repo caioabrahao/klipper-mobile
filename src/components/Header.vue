@@ -31,9 +31,10 @@ import { useConnectionStore } from '../stores/connection';
     </div>
     
     <div class="navbar-end">
-        <div>
-            {{ useConnectionStore().wsState }}
-        </div>
+        <ul class="opacity-50">
+            <li>Ws: {{ useConnectionStore().wsState }}</li>
+            <li>Klippy: {{ useConnectionStore().klippyState }}</li>
+        </ul>
     </div>
 </header>
 </template>
