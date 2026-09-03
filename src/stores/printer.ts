@@ -53,6 +53,12 @@ export const usePrinterStore = defineStore('printer', {
     filamentSensor: {
       "filament_detected": false,
       "enabled": true
+    },
+    stepperEnable: {
+      "stepper_z": false,
+      "stepper_y": false,
+      "stepper_x": false,
+      "extruder": false
     }
   }),
   persist: {
@@ -74,6 +80,16 @@ export const usePrinterStore = defineStore('printer', {
     },
     formattedPrintState(state){
       return state.printStatus.state.charAt(0).toUpperCase() + state.printStatus.state.slice(1)
+    },
+    allSteppersDisabled(state){
+      if (!state.stepperEnable.extruder && 
+          !state.stepperEnable.stepper_x &&
+          !state.stepperEnable.stepper_y &&
+          !state.stepperEnable.stepper_z){
+            return true
+      } else {
+        return false
+      }
     }
       
     
@@ -88,6 +104,7 @@ export const usePrinterStore = defineStore('printer', {
       Object.assign(this.printStatus, readings.print_stats)
       Object.assign(this.progressStatus, readings.display_status)
       Object.assign(this.filamentSensor, readings.filament_switch_sensor)
+      Object.assign(this.stepperEnable, readings.stepper_enable)
     }
 
   }

@@ -14,7 +14,8 @@ const printerObjectsSubscribe = {
             "fan": ['speed', 'rpm'],
             "print_stats": ['filename', 'total_duration', 'print_duration', 'filament_used', 'state', 'message', 'info'],
             "display_status": ['message', 'progress'],
-            "filament_switch_sensor": ['filament_detected', 'enabled']
+            "filament_switch_sensor": ['filament_detected', 'enabled'],
+            "stepper_enable": ['steppers']
         }
     },
     "id": 5434
