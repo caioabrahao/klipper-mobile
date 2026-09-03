@@ -76,7 +76,11 @@ const range = computed (() =>{
             <div v-html="icon"></div>
             <h4>{{ label }}</h4>
         </div>
-        <p class="opacity-50 flex-2">{{ printer.extruder.temperature }} °C <i class="ri-arrow-right-long-line"></i> {{ printer.extruder.target }} °C</p>
+        <p class="opacity-50 flex-4">
+            {{ temperature.toFixed(1) }} °C 
+            <i class="ri-arrow-right-long-line"></i> 
+            {{ targetTemperature.toFixed(1) }} °C
+        </p>
         <button @click="openModal(modal)" class="btn btn-outline btn-primary">Set Temp</button>
     </div>
 
