@@ -12,7 +12,7 @@ function handleImgError(event:any) {
 </script>
 
 <template>
-    <div class="relative w-full h-64 my-4 mb-8">
+    <div class="relative w-full h-64 my-4 mb-8 border border-base-300 rounded-xl">
         <img v-if="server.webcamFetchState === 'Success'" 
         :src="webcamStreamUrl"
         @error="handleImgError" 
