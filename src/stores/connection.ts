@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { usePrinterStore } from './printer'
+import { useSystemStore } from './system'
 
 // subscribe to all the objects the app needs no matter what
 const printerObjectsSubscribe = {
@@ -84,6 +85,7 @@ export const useConnectionStore = defineStore('connection', {
         
             ws.onmessage = (event: MessageEvent) => {
                 const printer = usePrinterStore();
+                const system = useSystemStore();
                 const result = JSON.parse(event.data)
                 if (result.method === undefined){
                     // console.log("First Reading:", result.result.status)
@@ -93,6 +95,11 @@ export const useConnectionStore = defineStore('connection', {
                     this.latestReading = result.params[0]
                     // console.log("Latest Reading:", result)
                     printer.updateReadings(this.latestReading)
+                } else if (result.method === 'notify_proc_stat_update'){
+                    console.log("Latest Proc Reading:", result.params[0])
+                    system.updateReadings(result.params[0])
+                } else if (result.method === 'notify_klippy_ready'){
+                    this.fetchKlippyStatus();
                 }
                 
             };

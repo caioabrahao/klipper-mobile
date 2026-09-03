@@ -17,3 +17,10 @@ export function formatMillimeters(num:number) {
 export function formatPercentage(decimal:number) {
   return decimal * 100;
 }
+
+export function kbToMb(kb:number, decimals = 2) {
+    if (typeof kb !== 'number' || isNaN(kb)) return '0.00 MB';
+    
+    const mb = kb / 1024;
+    return +mb.toFixed(decimals);
+}
