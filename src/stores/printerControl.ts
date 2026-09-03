@@ -34,7 +34,7 @@ export const usePrinterControlStore = defineStore('printerControl', {
                 console.error('Error sending POST request:', error);
             }
         },
-        async sendJobCommand(endpoint:string){
+        async sendFirmwareCommand(endpoint:string){
             const url = useConnectionStore().fullMoonrakerUrl + endpoint
             try{
                 const response = await fetch(url, {
@@ -48,20 +48,28 @@ export const usePrinterControlStore = defineStore('printerControl', {
                 console.error('Error sending POST request:', error);
             }
         },
+        hostRestart(){
+            this.sendFirmwareCommand('/printer/restart')
+            console.log('Sent Request: RESTART')
+        },
+        firmwareRestart(){
+            this.sendFirmwareCommand('/printer/firmware_restart')
+            console.log('Sent Request: FIRMWARE_RESTART')
+        },
         homeAxis(){
             this.sendGcode(['G28'])
         },
         pausePrint(){
-            this.sendJobCommand('/printer/print/pause')
+            this.sendFirmwareCommand('/printer/print/pause')
         },
         resumePrint(){
-            this.sendJobCommand('/printer/print/resume')
+            this.sendFirmwareCommand('/printer/print/resume')
         },
         cancelPrint(){
-            this.sendJobCommand('/printer/print/cancel')
+            this.sendFirmwareCommand('/printer/print/cancel')
         },
         emergencyStop(){
-            this.sendJobCommand('/printer/emergency_stop')
+            this.sendFirmwareCommand('/printer/emergency_stop')
         },
         disableSteppers(){
             this.sendGcode(['M84'])
@@ -72,11 +80,11 @@ export const usePrinterControlStore = defineStore('printerControl', {
         retract(){
             
         },
-        nozzleTemperatureSet(){
-            
+        nozzleTemperatureSet(temperature:string){
+            this.sendGcode([`M104 S${temperature}`])
         },
-        bedTemperatureSet(){
-            
+        bedTemperatureSet(temperature:string){
+            this.sendGcode([`M140 S${temperature}`])
         },
     }
 
