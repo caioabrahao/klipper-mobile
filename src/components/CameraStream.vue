@@ -17,7 +17,7 @@ function handleImgError(event:any) {
         :src="webcamStreamUrl"
         @error="handleImgError" 
         alt="webcam stream">
-        <div class="absolute w-full h-full z-10 flex items-center justify-center">
+        <div v-else class="absolute w-full h-full z-10 flex items-center justify-center">
             <span v-if="server.webcamFetchState === 'Loading'" class="loading loading-spinner loading-md"></span>
             <span v-else class="flex flex-col justify-center items-center">
                 <p>Error fetching webcam data</p>
