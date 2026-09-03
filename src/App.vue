@@ -5,11 +5,14 @@ import Header from './components/Header.vue';
 import { useConnectionStore } from './stores/connection.ts';
 import { onMounted } from 'vue';
 import KlippyState from './components/feedback/KlippyState.vue';
+import { useServerStore } from './stores/server.ts';
 
 const connection = useConnectionStore();
+const server = useServerStore();
 onMounted(() => {
   connection.wsAttemptConnection();
   connection.fetchKlippyStatus();
+  server.fetchWebcams();
 })
 </script>
 
