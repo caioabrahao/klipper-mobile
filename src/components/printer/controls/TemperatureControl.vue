@@ -2,7 +2,6 @@
 import { ref, computed } from 'vue'
 import { usePrinterControlStore } from '../../../stores/printerControl'
 import { usePrinterStore } from '../../../stores/printer';
-import { formatPercentage } from '../../../utils/unitFormatter';
 
 type SourceOptions = 'bed' | 'extruder';
 // type CardVariant = 'compact' | 'full';
