@@ -100,6 +100,10 @@ export const useConnectionStore = defineStore('connection', {
                     system.updateReadings(result.params[0])
                 } else if (result.method === 'notify_klippy_ready'){
                     this.fetchKlippyStatus();
+                } else if (result.method === 'notify_klippy_shutdown'){
+                    this.fetchKlippyStatus();
+                } else if (result.method === 'notify_klippy_disconnected'){
+                    this.fetchKlippyStatus();
                 }
                 
             };
