@@ -74,12 +74,6 @@ export const usePrinterControlStore = defineStore('printerControl', {
         disableSteppers(){
             this.sendGcode(['M84'])
         },
-        extrude(length:string, feedRate:string){
-            this.sendGcode(['M83', `G1 E${length} F${feedRate}`])
-        },
-        retract(){
-            
-        },
         nozzleTemperatureSet(temperature:string){
             this.sendGcode([`M104 S${temperature}`])
         },
@@ -92,7 +86,10 @@ export const usePrinterControlStore = defineStore('printerControl', {
                 `G1 X${x} Y${y} Z${z}`,
                 'G90'
             ])
-        }
+        },
+        moveExtruderRelative(length:number, feedRate = 300){
+            this.sendGcode(['M83', `G1 E${length} F${feedRate}`])
+        },
     }
 
 })
