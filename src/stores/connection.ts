@@ -96,7 +96,7 @@ export const useConnectionStore = defineStore('connection', {
                     // console.log("Latest Reading:", result)
                     printer.updateReadings(this.latestReading)
                 } else if (result.method === 'notify_proc_stat_update'){
-                    console.log("Latest Proc Reading:", result.params[0])
+                    // console.log("Latest Proc Reading:", result.params[0])
                     system.updateReadings(result.params[0])
                 } else if (result.method === 'notify_klippy_ready'){
                     this.fetchKlippyStatus();
