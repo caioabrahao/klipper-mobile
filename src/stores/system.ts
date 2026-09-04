@@ -25,38 +25,34 @@ export const useSystemStore = defineStore('system', {
         websocketConnections: 0,
         systemInfo: {
             cpuInfo: {
-                "cpu_count": 4,
-                "bits": "32bit",
-                "processor": "armv7l",
-                "cpu_desc": "ARMv7 Processor rev 4 (v7l)",
-                "serial_number": "b898bdb4",
-                "hardware_desc": "BCM2835",
-                "model": "Raspberry Pi 3 Model B Rev 1.2",
-                "total_memory": 945364,
-                "memory_units": "kB"
+                "cpu_count": 0,
+                "bits": "",
+                "processor": "",
+                "cpu_desc": "",
+                "serial_number": "",
+                "hardware_desc": "",
+                "model": "",
+                "total_memory": 0,
+                "memory_units": ""
             },
             sdInfo: {
-                "manufacturer_id": "03",
-                "manufacturer": "Sandisk",
-                "oem_id": "5344",
-                "product_name": "SU32G",
-                "product_revision": "8.0",
-                "serial_number": "46ba46",
-                "manufacturer_date": "4/2018",
-                "capacity": "29.7 GiB",
-                "total_bytes": 31914983424
+                "manufacturer_id": "",
+                "manufacturer": "",
+                "oem_id": "",
+                "product_name": "",
+                "product_revision": "",
+                "serial_number": "",
+                "manufacturer_date": "",
+                "capacity": "",
+                "total_bytes": 0
             },
             distribution: {
-                "name": "Raspbian GNU/Linux 10 (buster)",
-                "id": "raspbian",
-                "version": "10",
-                "version_parts": {
-                    "major": "10",
-                    "minor": "",
-                    "build_number": ""
-                },
-                "like": "debian",
-                "codename": "buster"
+                "name": "",
+                "id": "",
+                "version": "",
+                "version_parts": {},
+                "like": "",
+                "codename": ""
             },
             availableServices: [
                 "klipper",
@@ -101,11 +97,11 @@ export const useSystemStore = defineStore('system', {
 
     actions: {
         updateReadings(readings:any){
-        Object.assign(this.moonrakerStats, readings.moonraker_stats)
-        this.cpuTemp = readings.cpu_temp
-        Object.assign(this.systemCpuUsage, readings.system_cpu_usage)
-        Object.assign(this.systemMemoryUsage, readings.system_memory)
-        this.websocketConnections = readings.websocket_connections
+            Object.assign(this.moonrakerStats, readings.moonraker_stats)
+            this.cpuTemp = readings.cpu_temp
+            Object.assign(this.systemCpuUsage, readings.system_cpu_usage)
+            Object.assign(this.systemMemoryUsage, readings.system_memory)
+            this.websocketConnections = readings.websocket_connections
         },
 
         async fetchSystemInfo(){
@@ -117,6 +113,13 @@ export const useSystemStore = defineStore('system', {
                 const data = await response.json()
                 if (data.result) {
                     Object.assign(this.systemInfo, data.result)
+                    Object.assign(this.systemInfo.cpuInfo, data.result.system_info.cpu_info)
+                    Object.assign(this.systemInfo.distribution, data.result.system_info.distribution)
+                    Object.assign(this.systemInfo.sdInfo, data.result.system_info.sd_info)
+                    Object.assign(this.systemInfo.availableServices, data.result.system_info.instance_ids)
+                    Object.assign(this.systemInfo.serviceStates, data.result.system_info.service_state)
+                    Object.assign(this.systemInfo.network, data.result.system_info.network)
+                    console.log(data.result)
                 }
             } catch (err:any) {
                 console.error('Failed fetching Moonraker history:', err)
