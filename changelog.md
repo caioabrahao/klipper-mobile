@@ -16,3 +16,12 @@ Started Changelog
 - Temperature Card Component
 - Persistent Storage with Pinia
 - Vue Router
+  
+## b-1.0
+04 set 2026
+So far:
+- Added Capacitor
+- Changed app name
+- Created daisy UI theme
+- Added controls panel
+- Added server resource monitor
