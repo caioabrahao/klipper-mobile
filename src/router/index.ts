@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import DashboardView from '../views/DashboardView.vue'
 import FilesView from '../views/FilesView.vue'
 import SettingsView from '../views/SettingsView.vue'
-import ControlView from '../views/ControlView.vue'
+import PrinterControlView from '../views/PrinterControlView.vue'
 import JobHistoryView from '../views/JobHistoryView.vue'
 import SystemView from '../views/SystemView.vue'
 
@@ -35,7 +35,7 @@ const router = createRouter({
     },
     {
       path: '/control',
-      component: ControlView,
+      component: PrinterControlView,
       name: 'Control'
     },
     {

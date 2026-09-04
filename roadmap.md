@@ -28,6 +28,7 @@ remote control and useful printer notifications.
 - [ ] Connection state
 - [ ] Reconnection handling
 - [ ] Klippy state handling
+#### States to consider:
 
 ### Notifications
 - [ ] Print started

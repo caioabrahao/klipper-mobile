@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useConnectionStore } from '../../stores/connection';
+import { usePrinterControlStore } from '../../stores/printerControl';
 
+const command = usePrinterControlStore();
 const connection = useConnectionStore();
 const btnStyle = computed (() =>
     connection.klippyState === 'error' ? 
@@ -41,8 +43,8 @@ const stateStyle = computed(() =>
             <p>{{ connection.klippyStateMessage }}.</p>
         </div>
         <div class="card-actions">
-            <button :class="btnStyle" class="btn btn-soft">RESTART</button>
-            <button :class="btnStyle" class="btn btn-soft">FIRMWARE_RESTART</button>
+            <button @click="command.hostRestart" :class="btnStyle" class="btn btn-soft">RESTART</button>
+            <button @click="command.firmwareRestart" :class="btnStyle" class="btn btn-soft">FIRMWARE_RESTART</button>
         </div>
     </div>
 </template>

@@ -39,9 +39,8 @@ const stateColor = computed(() =>
         <progress class="progress progress-primary h-8 rounded-xl" :value="printer.progressStatus.progress" max="1"></progress>
     </div>
 
-    <div class="w-full h-64 my-4 mb-8">
-        <CameraStream/>
-    </div>
+    <CameraStream/>
+
     <div class="flex flex-col gap-2">
         <TempCard source="extruder"/>
         <TempCard source="bed"/>
