@@ -1,0 +1,11 @@
+.gradle
+build
+capacitor-cordova-android-plugins
+
+# Ignore local Android SDK paths
+local.properties
+
+# Ignore Capacitor's auto-generated web assets copy
+app/src/main/assets/public/
+app/src/main/assets/capacitor.config.json
+app/src/main/assets/capacitor.plugins.json
