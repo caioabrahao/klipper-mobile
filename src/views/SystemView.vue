@@ -28,7 +28,7 @@ onMounted(() => {
             <h2 class="mb-3">Live metrics</h2>
             <div class="grid grid-cols-1 gap-2 sm:grid-cols-3">
                 <div class="flex flex-col items-center justify-center gap-1 rounded-xl border border-base-300 p-4">
-                    <div class="radial-progress text-sm" :style="`--value:${system.moonrakerStats.cpu_usage}`" style="--size:4rem" :aria-valuenow="system.moonrakerStats.cpu_usage" role="progressbar">{{ system.moonrakerStats.cpu_usage }}%</div>
+                    <RadialProgress :value="system.moonrakerStats.cpu_usage" />
                     <p>CPU usage</p>
                 </div>
                 <div class="flex flex-col items-center justify-center gap-1 rounded-xl border border-base-300 p-4">
@@ -40,6 +40,12 @@ onMounted(() => {
                     <p class="text-2xl font-bold">{{ system.cpuTemp.toFixed(2) }} °C</p>
                     <p>CPU temperature</p>
                 </div>
+            </div>
+        </section>
+        <section>
+            <div class="flex flex-col gap-2">
+                <a href="#" class="btn w-full" disabled="disabled">View Connected Devices <i class="ri-arrow-right-s-line"></i></a>
+                <a href="#" class="btn w-full" disabled="disabled">Check Component Updates <i class="ri-arrow-right-s-line"></i></a>
             </div>
         </section>
 
