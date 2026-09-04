@@ -7,10 +7,14 @@ const control = usePrinterControlStore();
 <template>
     <div class="flex flex-col gap-4 card card-dash w-full p-2 items-center justify-center">
         <div class="grid grid-cols-3 grid-rows-2 w-fit">
-            <button class="btn col-start-2 row-start-1 aspect-square"><i class="ri-arrow-up-line"></i></button>
-            <button class="btn col-start-1 row-start-2 aspect-square"><i class="ri-arrow-left-line"></i></button>
-            <button class="btn col-start-2 row-start-2 aspect-square"><i class="ri-arrow-down-line"></i></button>
-            <button class="btn col-start-3 aspect-square row-start-2"><i class="ri-arrow-right-line"></i></button>
+            <button @click="control.moveToolheadRelative(0, 10, 0)" class="btn col-start-2 row-start-1 aspect-square"><i class="ri-arrow-up-line"></i></button>
+            <button @click="control.moveToolheadRelative(-10, 0, 0)" class="btn col-start-1 row-start-2 aspect-square"><i class="ri-arrow-left-line"></i></button>
+            <button @click="control.moveToolheadRelative(0, -10, 0)" class="btn col-start-2 row-start-2 aspect-square"><i class="ri-arrow-down-line"></i></button>
+            <button @click="control.moveToolheadRelative(10, 0, 0)" class="btn col-start-3 aspect-square row-start-2"><i class="ri-arrow-right-line"></i></button>
+        </div>
+        <div>
+            <button @click="control.moveToolheadRelative(0, 0, 10)" class="btn col-start-2 row-start-1 aspect-square"><i class="ri-arrow-up-line"></i></button>
+            <button @click="control.moveToolheadRelative(0, 0, -10)" class="btn col-start-2 row-start-1 aspect-square"><i class="ri-arrow-down-line"></i></button>
         </div>
 
         <div class="flex gap-4">

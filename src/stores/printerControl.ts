@@ -86,6 +86,13 @@ export const usePrinterControlStore = defineStore('printerControl', {
         bedTemperatureSet(temperature:string){
             this.sendGcode([`M140 S${temperature}`])
         },
+        moveToolheadRelative(x:number = 0, y:number = 0, z:number = 0){
+            this.sendGcode([
+                'G91',
+                `G1 X${x} Y${y} Z${z}`,
+                'G90'
+            ])
+        }
     }
 
 })
