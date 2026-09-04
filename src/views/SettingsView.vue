@@ -1,10 +1,18 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useConnectionStore } from '../stores/connection';
 
 const connection = useConnectionStore()
 const userMoonrakerUrl = ref(connection.moonrakerUrl)
 const isEditing = ref(false)
+const connectionStatus = computed(() => ([
+    { label: 'Moonraker Address', value: connection.moonrakerUrl || 'Not configured' },
+    { label: 'WebSocket', value: connection.wsState },
+    { label: 'Klippy', value: connection.klippyState || 'Unknown' },
+    { label: 'Hostname', value: connection.hostname || 'Unknown' },
+    { label: 'Log file', value: connection.logFileDir || 'Unknown' },
+    { label: 'Error', value: connection.error || 'None' }
+]))
 
 function updateMoonrakerUrl(url:string){
     const normalizedMoonrakerUrl = url.replace(/^https?:\/\//i, '');
@@ -20,67 +28,56 @@ function enableEditing(){
 </script>
 
 <template>
-    <section class="section">
+    <section class="section space-y-6">
         <h1>Settings</h1>
 
-        <div class="mb-6">
-            <h3>Connection</h3>
-            <fieldset class="fieldset">
-                <legend class="fieldset-legend">Moonraker IP Address</legend>
-                <div class="flex gap-2">
-                    <input v-model.trim="userMoonrakerUrl" :disabled="!isEditing" type="text" class="input" placeholder="klipper.local" />
-                    <button v-if="isEditing" @click="updateMoonrakerUrl(userMoonrakerUrl)" class="btn btn-success"><i class="ri-check-fill"></i></button>
-                    <button v-else @click="enableEditing" class="btn"><i class="ri-edit-2-fill"></i></button>
+        <div class="space-y-4">
+            <div class="card bg-base-100 border border-base-300">
+                <div class="card-body gap-4">
+                    <h3 class="card-title text-base">Connection</h3>
+                    <fieldset class="fieldset">
+                        <legend class="fieldset-legend">Moonraker IP Address</legend>
+                        <div class="flex gap-2">
+                            <input v-model.trim="userMoonrakerUrl" :disabled="!isEditing" type="text" class="input w-full" placeholder="klipper.local" />
+                            <button v-if="isEditing" @click="updateMoonrakerUrl(userMoonrakerUrl)" class="btn btn-success"><i class="ri-check-fill"></i></button>
+                            <button v-else @click="enableEditing" class="btn"><i class="ri-edit-2-fill"></i></button>
+                        </div>
+                    </fieldset>
+
+                    <div class="flex flex-wrap gap-2">
+                        <button @click="connection.wsAttemptConnection()" class="btn btn-sm">
+                            Reconnect WebSocket
+                        </button>
+                        <button @click="connection.fetchKlippyStatus()" class="btn btn-sm">
+                            Refresh Klippy Status
+                        </button>
+                    </div>
                 </div>
-                <p class="label">{{ connection.wsState }}</p>
-            </fieldset>
+            </div>
 
-            <div class="divider"></div>
+            <div class="card bg-base-100 border border-base-300">
+                <div class="card-body">
+                    <h3 class="card-title text-base">Connection Status</h3>
+                    <ul class="list">
+                        <li v-for="status in connectionStatus" :key="status.label" class="list-row">
+                            <span class="font-medium">{{ status.label }}</span>
+                            <span class="opacity-70 break-all text-right">{{ status.value }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-            <fieldset class="fieldset p-4">
-                <legend class="fieldset-legend">Enable Secure Connections?</legend>
-                <label class="label">
-                    No (http / ws)
-                    <input type="checkbox"  class="toggle toggle-primary" />
-                    Yes (https / wss)
-                </label>
-            </fieldset>
-
-            <div>
-                <ul class="list">
-                    <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Connection States</li>
-
-                    <li class="list-row items-center">
-                        <p>WebSocket</p>
-                        <div>{{ connection.wsState }}</div>
-                        <button class="btn">
-                            <i class="ri-refresh-line"></i>    
-                        </button>
-                    </li>
-
-                    <li class="list-row items-center">
-                        <p>Klippy</p>
-                        <div>{{ connection.klippyState }}</div>
-                        <button @click="connection.fetchKlippyStatus()" class="btn">
-                            <i class="ri-refresh-line"></i>    
-                        </button>
-                    </li>
-                    
-                    
+        <div class="card bg-base-100 border border-base-300">
+            <div class="card-body">
+                <h3 class="card-title text-base">App Info</h3>
+                <ul class="space-y-1 opacity-70">
+                    <li>App version: devBuild a-1.8</li>
+                    <li>App Repository: <a class="btn-link" href="https://github.com/caioabrahao/klipper-mobile">Here</a></li>
+                    <li>Created by: <a class="btn-link" href="https://github.com/caioabrahao">Caio Abrahão</a></li>
                 </ul>
             </div>
         </div>
-        <div>
-            <h3>App Info</h3>
-            <ul class="opacity-50">
-                <li>App version: devBuild a-1.8</li>
-                <li>App Repository: <a class="btn-link" href="https://github.com/caioabrahao/klipper-mobile">Here</a></li>
-            </ul>
-            <h4>Credits</h4>
-            <ul class="opacity-50">
-                <li>Created by: <a class="btn-link" href="https://github.com/caioabrahao">Caio Abrahão</a></li>
-            </ul>
-        </div>
-        
+
     </section>
 </template>
