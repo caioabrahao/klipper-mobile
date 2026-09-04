@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@capacitor/android": "^8.5.1",
+    "@capacitor/core": "^8.5.1",
     "pinia": "^4.0.3",
     "pinia-plugin-persistedstate": "^4.7.1",
     "remixicon": "^4.9.1",
@@ -16,6 +18,7 @@
     "vue-router": "^5.2.0"
   },
   "devDependencies": {
+    "@capacitor/cli": "^8.5.1",
     "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^24.13.3",
     "@vitejs/plugin-vue": "^6.0.8",
